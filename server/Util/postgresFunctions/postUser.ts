@@ -1,0 +1,14 @@
+import {pool as db} from "../../db.js"
+import { UserType } from "../Class/User.js"
+
+
+export const postNewUser = async (user: UserType)=>{
+    const {username, password, token, tokenKey, dateCreated, saltRounds} = user
+    try {
+        let data =  await db.query("INSERT INTO users (userName, password, token, tokenKey, dateCreated, saltRounds) VALUES($1, $2, $3, $4, $5, $6) RETURNING *", [username, password, token, tokenKey, dateCreated, saltRounds])
+        return data
+    } catch (err){
+        console.log(err)
+        return null
+    }
+}

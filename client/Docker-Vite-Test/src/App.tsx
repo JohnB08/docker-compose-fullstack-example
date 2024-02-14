@@ -18,12 +18,11 @@ function App() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body:JSON.stringify({
-        username: "John",
-        password: "ABCDE"
+        username: "Bjarne",
+        password: "123456"
       })
     }
     setOptions(requestHeaders)
-    console.log(data, error)
   }
 
   const testUserLogin = () =>{
@@ -33,13 +32,13 @@ function App() {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
-        username: "John",
-        password: "ABCDE"
+        username: "Bjarne",
+        password: "123456"
       })
     }
     setOptions(requestHeaders)
-    console.log(data,error)
   }
+  console.log(data,error)
 
   return (
     <>
