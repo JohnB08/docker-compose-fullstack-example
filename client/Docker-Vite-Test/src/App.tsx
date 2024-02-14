@@ -6,7 +6,7 @@ import { useFetch, mainUrl } from './Utils/Hooks/Fetch'
 
 function App() {
   const [count, setCount] = useState(0)
-  const [url, setUrl] = useState(mainUrl)
+  const [url, setUrl] = useState<string>(mainUrl)
   const [options, setOptions] = useState<RequestInit | null>(null)
   const [data, error] = useFetch(url, options)
 

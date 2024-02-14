@@ -27,5 +27,9 @@ services:
       - POSTGRES_PASSWORD=Ein2Tre4
       - POSTGRES_USER=JOHN
       - POSTGRES_DB=TESTDB
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "1G"
 
-      
