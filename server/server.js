@@ -44,6 +44,7 @@ app.post("/create", async (req, res) => {
         return res.status(401).json({ message: "User Allready Created" });
     }
     let newUser = await User.initUser(username, password);
+    console.log(newUser);
     let tryPost = await postNewUser(newUser);
     console.log(tryPost);
     if (!tryPost.success) {

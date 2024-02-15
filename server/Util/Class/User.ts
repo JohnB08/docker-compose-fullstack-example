@@ -2,11 +2,11 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
 const generateSalt = () =>{
-        return Math.ceil(Math.random()*50)
+        return Math.ceil(Math.random()*10)
     }
 
 const generateTokenKey = () =>{
-    return Math.ceil(Math.random()*10000000000).toString(32).slice(0, 10)
+    return Math.ceil(Math.random()*1000).toString(32).slice(0, 4)
 }
 
 export class User{

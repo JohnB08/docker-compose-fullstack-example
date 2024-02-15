@@ -1,6 +1,7 @@
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { useFetch, mainUrl } from './Utils/Hooks/Fetch'
+import { useDebouncedCallback } from 'use-debounce'
 
 function App() {
   const [url, setUrl] = useState<string>(mainUrl)
@@ -10,7 +11,8 @@ function App() {
   const [pw, setPw] = useState<string>("")
 
 
-  const testUserServer = () =>{
+  const testUserServer = (name: string, pw: string) =>{
+    console.log("Trying To Create User")
     if (name.length === 0 || pw.length === 0) return
     const serverUrl = mainUrl + "/create"
     setUrl(serverUrl)
@@ -25,7 +27,8 @@ function App() {
     setOptions(requestHeaders)
   }
 
-  const testUserLogin = () =>{
+  const testUserLogin = (name: string, pw: string) =>{
+    console.log("Trying to Log In")
     if (name.length === 0 || pw.length === 0) return
     const serverUrl = mainUrl + "/login"
     setUrl(serverUrl)
@@ -40,27 +43,27 @@ function App() {
     setOptions(requestHeaders)
   }
   console.log(data,error)
+const updateName = useDebouncedCallback((name)=>{
+  setName(name)
+}, 1000)
 
-  const updateName = (event: ChangeEvent<HTMLInputElement>) =>{
-    setName(event.target.value)
-  }
   console.log(name)
-  const updatePw = (event: ChangeEvent<HTMLInputElement>) =>{
-    setPw(event.target.value)
-  }
+const updatePw = useDebouncedCallback((pw)=>{
+  setPw(pw)
+}, 1000)
   console.log(pw)
   return (
     <>
     <div className='mainContainer'>
       <div className='inputContainer'>
-        <label htmlFor="nameInput">Input Name <input type="text" name="nameInput" id="nameInput" defaultValue="" onChange={updateName}/> </label>
-        <label htmlFor="pwInput">Input Password <input type="text" name="pwInput" id="pwInput" defaultValue="" onChange={updatePw}/> </label>
+        <label htmlFor="nameInput">Input Name <input type="text" name="nameInput" id="nameInput" defaultValue="" onChange={(e)=>updateName(e.target.value)}/> </label>
+        <label htmlFor="pwInput">Input Password <input type="text" name="pwInput" id="pwInput" defaultValue="" onChange={(e)=>updatePw(e.target.value)}/> </label>
       </div>
       <div className='buttonContainer'>
-        <button onClick={()=>testUserServer()}>
+        <button onClick={()=>testUserServer(name, pw)}>
           Test Create User
         </button>
-        <button onClick={()=>testUserLogin()}>
+        <button onClick={()=>testUserLogin(name, pw)}>
           Test Login User
         </button>
       </div>
