@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.Main{
+    display: flex;
+    height: 100svh;
+    width: 100svh;
+}
+
+.SideBar{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: wheat;
+    flex: 1;
+    padding: 1rem 1rem;
+}
+.SideBar h1{
+    font-size: 1.5rem;
+}
+.Details{
+    display: grid;
+    place-content: center;
+    flex: 3
+}

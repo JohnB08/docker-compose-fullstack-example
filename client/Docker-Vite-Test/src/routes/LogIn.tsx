@@ -1,17 +1,28 @@
 import { useState } from 'react'
-import './App.css'
-import { useFetch, mainUrl } from './Utils/Hooks/Fetch'
+import Style from './LogIn.module.css'
+import { useFetch, mainUrl } from '../Utils/Hooks/Fetch'
 import { useDebouncedCallback } from 'use-debounce'
-
-function App() {
+import { useNavigate } from 'react-router-dom'
+import { ValidData } from '../types/types'
+function LogIn() {
+  const navigate = useNavigate();
   const [url, setUrl] = useState<string>(mainUrl)
   const [options, setOptions] = useState<RequestInit | null>(null)
-  const [data, error] = useFetch(url, options)
+  const [data, error, status] = useFetch(url, options)
   const [name, setName] = useState<string>("")
   const [pw, setPw] = useState<string>("")
 
 
-  const testUserServer = (name: string, pw: string) =>{
+  const validateData = (data: unknown): data is ValidData =>{
+    return(
+      typeof data === "object" &&
+      data !== null &&
+      typeof (data as ValidData).message === "string" &&
+      typeof (data as ValidData).user === "object"
+    )
+  }
+
+  const testUserCreate = (name: string, pw: string) =>{
     console.log("Trying To Create User")
     if (name.length === 0 || pw.length === 0) return
     const serverUrl = mainUrl + "/create"
@@ -47,6 +58,10 @@ const updateName = useDebouncedCallback((name)=>{
   setName(name)
 }, 1000)
 
+if (status === 200 && validateData(data)){
+  navigate("/user", {state: {user: data.user}})
+}
+
   console.log(name)
 const updatePw = useDebouncedCallback((pw)=>{
   setPw(pw)
@@ -54,13 +69,13 @@ const updatePw = useDebouncedCallback((pw)=>{
   console.log(pw)
   return (
     <>
-    <div className='mainContainer'>
-      <div className='inputContainer'>
+    <div className={Style.mainContainer}>
+      <div className={Style.inputContainer}>
         <label htmlFor="nameInput">Input Name <input type="text" name="nameInput" id="nameInput" defaultValue="" onChange={(e)=>updateName(e.target.value)}/> </label>
         <label htmlFor="pwInput">Input Password <input type="text" name="pwInput" id="pwInput" defaultValue="" onChange={(e)=>updatePw(e.target.value)}/> </label>
       </div>
-      <div className='buttonContainer'>
-        <button onClick={()=>testUserServer(name, pw)}>
+      <div className={Style.buttonContainer}>
+        <button onClick={()=>testUserCreate(name, pw)}>
           Test Create User
         </button>
         <button onClick={()=>testUserLogin(name, pw)}>
@@ -72,4 +87,4 @@ const updatePw = useDebouncedCallback((pw)=>{
   )
 }
 
-export default App
+export default LogIn

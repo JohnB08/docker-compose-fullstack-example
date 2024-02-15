@@ -33,8 +33,7 @@ app.post("/login", async (req, res)=>{
   if (!validUserPassword){
     return res.status(401).json({message: "Invalid Login Info"})
   }
-  const token = user.token
-  res.status(200).json({message: "Authentication Successfull.", token: token})
+  res.status(200).json({message: "Authentication Successfull.", user: user})
 })
 
 app.post("/create", async (req, res)=>{
