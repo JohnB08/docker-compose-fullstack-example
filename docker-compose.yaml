@@ -9,9 +9,6 @@ services:
 
   server:
     image: node:20-bookworm-slim
-    # build:
-    #   context: ./server
-    #   dockerfile: Dockerfile
     command: ["node", "/app/server.js"]
     volumes:
       - ./server/:/app/
