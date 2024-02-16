@@ -1,14 +1,14 @@
-#Express Server API Documentation
-##Overview
+# Express Server API Documentation
+## Overview
 This documentation provides details about the endpoints available in the Express server API.
 
 **Base URL**: http://localhost:3000
 
-##Authentication
+## Authentication
 No authentication is required to access the endpoints.
 
-##Endpoints
-###Login
+## Endpoints
+### Login
  - **Endpoint:** POST /login
  - **Description:** Authenticates a user with the provided username and password.
  - **Request Body:**
@@ -43,7 +43,7 @@ Example Response (Success)
   }
 }
 ```
-###Create User
+### Create User
 
  - **Endpoint:** POST /create
  - **Description:** Creates a new user with the provided username and password.
