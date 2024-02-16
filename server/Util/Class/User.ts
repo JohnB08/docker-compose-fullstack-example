@@ -16,6 +16,7 @@ export class User{
     dateCreated: string
     tokenkey: string
     saltRounds: number
+
     private constructor(username: string, password: string, saltRounds: number, token: string, tokenkey: string){
         this.username = username
         this.saltRounds = saltRounds
@@ -24,7 +25,12 @@ export class User{
         this.dateCreated = new Date().toLocaleDateString()
         this.token = token
     }  
-
+    /**
+     * Lager en nytt user object basert på User class via username og password parameters. 
+     * @param username 
+     * @param password 
+     * @returns nytt User object. 
+     */
     static async initUser(username: string, password: string){
         const salt = generateSalt()
         const hashedPassword = await bcrypt.hash(password, salt)

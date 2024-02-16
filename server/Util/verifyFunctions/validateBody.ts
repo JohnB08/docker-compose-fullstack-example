@@ -7,6 +7,11 @@ type userBody = {
     password: string
 }
 
+/**
+ * Validerer urlbody som en token login request
+ * @param body 
+ * @returns boolean
+ */
 export const validateAsToken = (body: any): body is userToken => {
     return(
         typeof body === "object" &&
@@ -14,6 +19,12 @@ export const validateAsToken = (body: any): body is userToken => {
     )
 }
 
+
+/**
+ * validerer urlbody som en user login request
+ * @param body 
+ * @returns boolean
+ */
 export const validateAsUserBody = (body: any): body is userBody =>{
     return(
         typeof body === "object" &&

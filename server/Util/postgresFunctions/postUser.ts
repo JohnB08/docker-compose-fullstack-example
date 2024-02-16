@@ -2,6 +2,12 @@ import {pool as db} from "../../db.js"
 import { UserType } from "../Class/User.js"
 
 
+
+/**
+ * Prøver å poste en ny bruker til user-table i postgres server
+ * @param user 
+ * @returns object {data/error, success: boolean}
+ */
 export const postNewUser = async (user: UserType)=>{
     const {username, password, token, tokenkey, dateCreated, saltRounds} = user
     try {

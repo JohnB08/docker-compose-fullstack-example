@@ -1,4 +1,9 @@
 import { pool as db } from "../../db.js";
+/**
+ * Prøver å poste en ny bruker til user-table i postgres server
+ * @param user
+ * @returns object {data/error, success: boolean}
+ */
 export const postNewUser = async (user) => {
     const { username, password, token, tokenkey, dateCreated, saltRounds } = user;
     try {

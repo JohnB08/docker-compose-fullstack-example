@@ -21,6 +21,12 @@ export class User {
         this.dateCreated = new Date().toLocaleDateString();
         this.token = token;
     }
+    /**
+     * Lager en nytt user object basert på User class via username og password parameters.
+     * @param username
+     * @param password
+     * @returns nytt User object.
+     */
     static async initUser(username, password) {
         const salt = generateSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
