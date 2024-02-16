@@ -26,7 +26,7 @@ app.post("/login", async (req, res)=>{
     return res.status(500).json({message:"Internal Database Error", error: fetchedUser.err})
   }
   if (fetchedUser.success && fetchedUser.data?.rowCount === 0){
-    return res.status(401).json({message: "User does not exist"})
+    return res.status(404).json({message: "User does not exist"})
   }
   const user: UserType = fetchedUser.data?.rows[0]
   const validUserPassword = await verifyPassword(user, password)
@@ -48,7 +48,7 @@ app.post("/create", async (req, res)=>{
     return res.status(500).json({message: "Internal Server Error", error: existingUsername.err})
   }
   if(existingUsername.success && existingUsername.data?.rowCount !== 0){
-    return res.status(401).json({message: "User Allready Created"})
+    return res.status(400).json({message: "User Allready Created"})
   }
     let newUser = await User.initUser(username, password)
     console.log(newUser)
