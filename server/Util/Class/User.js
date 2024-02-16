@@ -11,12 +11,12 @@ export class User {
     password;
     token;
     dateCreated;
-    tokenKey;
+    tokenkey;
     saltRounds;
-    constructor(username, password, saltRounds, token, tokenKey) {
+    constructor(username, password, saltRounds, token, tokenkey) {
         this.username = username;
         this.saltRounds = saltRounds;
-        this.tokenKey = tokenKey;
+        this.tokenkey = tokenkey;
         this.password = password;
         this.dateCreated = new Date().toLocaleDateString();
         this.token = token;
@@ -24,8 +24,8 @@ export class User {
     static async initUser(username, password) {
         const salt = generateSalt();
         const hashedPassword = await bcrypt.hash(password, salt);
-        const tokenKey = generateTokenKey();
-        const token = jwt.sign({ userId: username }, tokenKey, { expiresIn: "1h" });
-        return new User(username, hashedPassword, salt, token, tokenKey);
+        const tokenkey = generateTokenKey();
+        const token = jwt.sign({ userId: username }, tokenkey, { expiresIn: "1h" });
+        return new User(username, hashedPassword, salt, token, tokenkey);
     }
 }

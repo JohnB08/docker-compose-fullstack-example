@@ -4,5 +4,11 @@ export const verifyPassword = async (user, password) => {
     return await bcrypt.compare(password, user.password);
 };
 export const verifyToken = async (user, token) => {
-    return jwt.verify(token, user.tokenKey);
+    try {
+        const verifiedToken = jwt.verify(token, user.tokenkey);
+        return verifiedToken;
+    }
+    catch (error) {
+        return error;
+    }
 };

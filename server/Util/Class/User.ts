@@ -14,12 +14,12 @@ export class User{
     password: string
     token: string
     dateCreated: string
-    tokenKey: string
+    tokenkey: string
     saltRounds: number
-    private constructor(username: string, password: string, saltRounds: number, token: string, tokenKey: string){
+    private constructor(username: string, password: string, saltRounds: number, token: string, tokenkey: string){
         this.username = username
         this.saltRounds = saltRounds
-        this.tokenKey = tokenKey
+        this.tokenkey = tokenkey
         this.password = password
         this.dateCreated = new Date().toLocaleDateString()
         this.token = token
@@ -28,9 +28,9 @@ export class User{
     static async initUser(username: string, password: string){
         const salt = generateSalt()
         const hashedPassword = await bcrypt.hash(password, salt)
-        const tokenKey = generateTokenKey()
-        const token = jwt.sign({userId: username}, tokenKey, {expiresIn: "1h"})
-        return new User(username, hashedPassword, salt, token, tokenKey)
+        const tokenkey = generateTokenKey()
+        const token = jwt.sign({userId: username}, tokenkey, {expiresIn: "1h"})
+        return new User(username, hashedPassword, salt, token, tokenkey)
     }
 }
 

@@ -53,6 +53,21 @@ function LogIn() {
     }
     setOptions(requestHeaders)
   }
+
+const testUserLoginWithToken = (token: string)=>{
+  console.log(token)
+  const loginUrl = mainUrl + "/login"
+  setUrl(loginUrl)
+  const requestHeaders: RequestInit = {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      token: token
+    })
+  }
+  setOptions(requestHeaders)
+}
+
   console.log(data,error)
 const updateName = useDebouncedCallback((name)=>{
   setName(name)
@@ -67,6 +82,8 @@ const updatePw = useDebouncedCallback((pw)=>{
   setPw(pw)
 }, 1000)
   console.log(pw)
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJTaWdyaWQiLCJpYXQiOjE3MDgwNzAzODYsImV4cCI6MTcwODA3Mzk4Nn0.d5jRv-BGcYZeXifstaZQZ9r6VHULl9pDwV5rAsXgb5I"
+
   return (
     <>
     <div className={Style.mainContainer}>
@@ -80,6 +97,9 @@ const updatePw = useDebouncedCallback((pw)=>{
         </button>
         <button onClick={()=>testUserLogin(name, pw)}>
           Test Login User
+        </button>
+        <button onClick={()=>testUserLoginWithToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJHbGVubiBGcmVkcmlrIiwiaWF0IjoxNzA4MDc1NTg4LCJleHAiOjE3MDgwNzkxODh9.FX7INelIYS0_tAZiSPaM9wdbLtvexQom_lfPQ57dAVA")}>
+          Test Token.
         </button>
       </div>
     </div>
